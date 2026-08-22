@@ -41,10 +41,12 @@ Thumbs.db
 
 # Project specific
 *.pkl
-*.csv
 *.png
 *.pptx
 *.docx
+
+# Allow training data CSV
+!ev_telemetry_data.csv
 
 # Logs
 *.log

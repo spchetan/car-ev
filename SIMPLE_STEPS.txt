@@ -1,0 +1,87 @@
+================================================================================
+  SIMPLE STEPS: Upload to GitHub & Deploy to Internet
+================================================================================
+
+STEP 1: UPLOAD TO GITHUB (5 minutes)
+================================================================================
+
+1. Go to: https://github.com/spchetan/car-ev
+
+2. Click "Add file" → "Upload files"
+
+3. Upload these files from your project folder:
+   ✓ index.html
+   ✓ app.py
+   ✓ train_model.py
+   ✓ requirements.txt
+   ✓ render.yaml
+   ✓ railway.json
+   ✓ Procfile
+   ✓ runtime.txt
+   ✓ start.sh
+   ✓ wsgi.py
+   ✓ .gitignore
+
+4. Click "Commit changes"
+
+5. Done! ✓
+
+
+STEP 2: DEPLOY ON RENDER.COM (5 minutes)
+================================================================================
+
+1. Go to: https://render.com
+
+2. Click "Get Started for Free"
+
+3. Sign up with GitHub
+
+4. Click "New +" → "Web Service"
+
+5. Select: spchetan/car-ev
+
+6. Fill in:
+   Name: ev-range-prediction
+   Build Command: pip install -r requirements.txt && python train_model.py
+   Start Command: gunicorn --bind 0.0.0.0:$PORT --timeout 600 --workers 2 app:app
+   Instance Type: Free
+
+7. Click "Create Web Service"
+
+8. Wait 3-5 minutes
+
+9. Done! ✓
+
+
+STEP 3: GET YOUR URL
+================================================================================
+
+Your app will be live at:
+https://ev-range-prediction.onrender.com
+
+Share this URL with anyone!
+
+
+THAT'S IT! 🎉
+================================================================================
+
+Total Time: 10 minutes
+Cost: FREE
+Your app is now accessible from anywhere in the world!
+
+
+IMPORTANT COMMANDS (Copy these for Render.com):
+================================================================================
+
+Build Command:
+pip install -r requirements.txt && python train_model.py
+
+Start Command:
+gunicorn --bind 0.0.0.0:$PORT --timeout 600 --workers 2 app:app
+
+
+NEED HELP?
+================================================================================
+
+See detailed guide: README_DEPLOYMENT.md
+Render docs: https://render.com/docs

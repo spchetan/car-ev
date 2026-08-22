@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, send_file
 import pickle
 import pandas as pd
 import numpy as np
@@ -24,7 +24,7 @@ def load_model():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return send_file('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -71,15 +71,14 @@ def health():
 
 if __name__ == '__main__':
     if load_model():
+        port = int(os.environ.get('PORT', 5000))
         print("\n" + "="*60)
         print("EV Range Prediction API Server")
         print("="*60)
-        print("Server starting on http://localhost:5000")
-        print("Open your browser and navigate to http://localhost:5000")
+        print(f"Server starting on port {port}")
         print("="*60 + "\n")
-        app.run(debug=True, host='0.0.0.0', port=5001)
+        app.run(debug=False, host='0.0.0.0', port=port)
     else:
         print("\nPlease run the following commands first:")
-        print("1. python generate_dataset.py")
-        print("2. python train_model.py")
-        print("3. python app.py")
+        print("1. python train_model.py")
+        print("2. python app.py")

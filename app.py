@@ -15,7 +15,20 @@ def train_model_if_needed():
     if not os.path.exists('ev_range_model.pkl') or not os.path.exists('feature_metadata.pkl'):
         print("Model files not found. Training model now...")
         try:
+            # Generate data if CSV doesn't exist
+            if not os.path.exists('ev_telemetry_data.csv'):
+                print("Training data not found. Generating synthetic data...")
+                result = subprocess.run(['python', 'generate_synthetic_data.py'], 
+                                      capture_output=True, 
+                                      text=True, 
+                                      timeout=60)
+                print(result.stdout)
+                if result.returncode != 0:
+                    print(f"Data generation failed: {result.stderr}")
+                    return False
+            
             # Run train_model.py
+            print("Training model with data...")
             result = subprocess.run(['python', 'train_model.py'], 
                                   capture_output=True, 
                                   text=True, 

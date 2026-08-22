@@ -181,20 +181,21 @@ def health():
         'model_loaded': model is not None
     })
 
+# Train model when module is loaded (works with gunicorn!)
+print("\n" + "="*60)
+print("EV RANGE PREDICTION API SERVER - INITIALIZING")
+print("="*60)
+
+if train_and_load_model():
+    print("✅ Model loaded and ready!")
+else:
+    print("⚠️  Model training failed, predictions will not work")
+
+print(f"   Model status: {'LOADED ✅' if model is not None else 'NOT LOADED ❌'}")
+print("="*60 + "\n")
+
 if __name__ == '__main__':
-    # Train model on startup
-    print("\n" + "="*60)
-    print("EV RANGE PREDICTION API SERVER")
-    print("="*60)
-    
-    if train_and_load_model():
-        print("✅ Model loaded and ready!")
-    else:
-        print("⚠️  Model training failed, but server will start anyway")
-    
+    # This runs only when using `python app.py` directly
     port = int(os.environ.get('PORT', 5000))
-    print(f"\n🚀 Starting server on port {port}")
-    print(f"   Model status: {'LOADED ✅' if model is not None else 'NOT LOADED ❌'}")
-    print("="*60 + "\n")
-    
+    print(f"🚀 Starting development server on port {port}")
     app.run(debug=False, host='0.0.0.0', port=port)
